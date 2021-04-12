@@ -17,7 +17,7 @@ const net = {
     y: 0,
     width: netWidth,
     height: netHeight,
-    color: "#FF7F50"
+    color: "white"
 };
 
 const user = {
@@ -25,7 +25,7 @@ const user = {
     y: canvas.height / 2 - paddleHeight / 2,
     width: paddleWidth,
     height: paddleHeight,
-    color: "#FF7F50",
+    color: "Orange",
     score: 0
 };
 
@@ -34,7 +34,7 @@ const ai = {
     y: canvas.height / 2 - paddleHeight / 2,
     width: paddleWidth,
     height: paddleHeight,
-    color: "#FF7F50",
+    color: "Orange",
     score: 0
 };
 
@@ -45,7 +45,7 @@ const ball = {
     speed: 7,
     velocityX: 5,
     velocityY: 5,
-    color: "#FF7F50",
+    color: "#00FF7F",
 };
 /* object declaration ends */
 
@@ -58,8 +58,8 @@ function drawNet(){
     ctx.fillRect(net.x, net.y, net.width, net.height);
 }
 function drawScore(x,y,score){
-    ctx.fillStyle = "#FF7F50";
-    ctx.font = '30px sans-serif';
+    ctx.fillStyle = "#00FF7F";
+    ctx.font = '35px serif';
 
     // syntax --> fillText(text,x,y)
     ctx.fillText(score,x,y);
@@ -92,11 +92,11 @@ function update(){
     // ai paddle movement
 
     // collision detection on paddles
-    
+
 }
 
 function render(){
-    ctx.fillStyle = "#FFEBCD";
+    ctx.fillStyle = "#2E8B57";
     ctx.fillRect(0,0, canvas.width, canvas.height);
 drawNet();
 //draw user score
