@@ -50,42 +50,75 @@ const ball = {
 /* object declaration ends */
 
 /* drawing functions */
+function drawNet(){
+    //set the color of the net
+    ctx.fillStyle = net.color;
 
+    // syntax --> fillRect(x,y,width,height)
+    ctx.fillRect(net.x, net.y, net.width, net.height);
+}
+function drawScore(x,y,score){
+    ctx.fillStyle = "#FF7F50";
+    ctx.font = '30px sans-serif';
+
+    // syntax --> fillText(text,x,y)
+    ctx.fillText(score,x,y);
+}
+
+function drawPaddle(x,y,width,height,color){
+    ctx.fillStyle = color;
+    ctx.fillRect(x,y,width,height);
+}
+
+function drawBall(x,y,radius,color){
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    // syntax --> arc(x, y, radius, startAngle, endAngle, antiClockwise_or_not)
+    ctx.arc(x,y,radius,0,Math.PI*2,true);
+    ctx.closePath();
+    ctx.fill();
+}
 
 /* drawing functions ends */
+function update(){
+    // move the paddle
 
+    // check if ball hits top or bottom wall
 
+    // move the ball
+    ball.x += ball.velocityX;
+    ball.y += ball.velocityY;
 
+    // ai paddle movement
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // collision detection on paddles
+    
+}
 
 function render(){
     ctx.fillStyle = "#FFEBCD";
     ctx.fillRect(0,0, canvas.width, canvas.height);
+drawNet();
+//draw user score
+drawScore(canvas.width / 4, canvas.height / 6, user.score);
+
+//draw ai score
+drawScore(3*canvas.width / 4, canvas.height / 6, ai.score);
+
+//draw user paddle
+drawPaddle(user.x, user.y, user.width, user.height, user.color);
+
+//draw ai paddle
+drawPaddle(ai.x, ai.y, ai.width, ai.height, ai.color);
+
+//draw ball
+drawBall(ball.x, ball.y, ball.radius, ball.color);
 }
 
-render();
+function gameLoop(){
+    update();
+    render();
+}
+
+// calls gameLoop() function 60 times per second
+setInterval(gameLoop, 1000 / 60);
