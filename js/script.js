@@ -29,6 +29,7 @@ const user = {
     score: 0
 };
 
+// for "rectangles" the axis starts from its top left corner
 const ai = {
     x: canvas.width - (paddleWidth +10),
     y: canvas.height / 2 - paddleHeight / 2,
@@ -41,13 +42,15 @@ const ai = {
 const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    radius: 7,
+    radius: 10,
     speed: 7,
     velocityX: 5,
     velocityY: 5,
     color: "#00FF7F",
 };
 /* object declaration ends */
+
+
 
 /* drawing functions */
 function drawNet(){
@@ -59,7 +62,7 @@ function drawNet(){
 }
 function drawScore(x,y,score){
     ctx.fillStyle = "#00FF7F";
-    ctx.font = '35px serif';
+    ctx.font = '30px Courier';
 
     // syntax --> fillText(text,x,y)
     ctx.fillText(score,x,y);
@@ -80,8 +83,49 @@ function drawBall(x,y,radius,color){
 }
 
 /* drawing functions ends */
+
+
+/* moving paddles*/
+window.addEventListener('keydown', keyDownHandler);
+window.addEventListener('keyup', keyUpHandler);
+
+// gets activated when we press we press down a key
+function keyDownHandler(event){
+    switch (event.keyCode){
+        case 38:
+            // set upArrowPressed = true
+            upArrowPressed = true;
+            break;
+            // "down arrow" key
+        case 40:
+            downArrowPressed = true;
+            break;
+    }
+}
+
+// gets activated when we release the key
+function keyUpHandler(event){
+    switch (event.keyCode){
+        // "up arrow" key
+        case 38:
+            // set upArrowPressed = false
+            upArrowPressed = false;
+            break;
+        // "down arrow" key
+        case 40:
+            downArrowPressed = false;
+            break;
+    }
+}
+/* moving paddles section end */
+
 function update(){
     // move the paddle
+    if (upArrowPressed && user.y > 0) {
+        user.y -=8;
+    } else if (downArrowPressed && (user.y < canvas.height - user.height)){
+        user.y +=8;
+    }
 
     // check if ball hits top or bottom wall
 
