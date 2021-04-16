@@ -1,6 +1,11 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
 
+// some sounds
+const hitSound = new Audio('../sounds/hitSound.wav');
+const scoreSound = new Audio('../sounds/scoreSound.wav');
+const wallHitSound = new Audio('../sounds/wallHitSound.wav');
+
 const netWidth = 4;
 const netHeight = canvas.height;
 
@@ -25,7 +30,7 @@ const user = {
     y: canvas.height / 2 - paddleHeight / 2,
     width: paddleWidth,
     height: paddleHeight,
-    color: "Orange",
+    color: "#f150e4",
     score: 0
 };
 
@@ -35,18 +40,19 @@ const ai = {
     y: canvas.height / 2 - paddleHeight / 2,
     width: paddleWidth,
     height: paddleHeight,
-    color: "Orange",
+    color: "#68f10c",
     score: 0
 };
 
 const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    radius: 10,
+    // radius: 46,
+    radius: 26,
     speed: 7,
     velocityX: 5,
     velocityY: 5,
-    color: "#00FF7F",
+    color: "#09a89b",
 };
 /* object declaration ends */
 
@@ -61,8 +67,8 @@ function drawNet(){
     ctx.fillRect(net.x, net.y, net.width, net.height);
 }
 function drawScore(x,y,score){
-    ctx.fillStyle = "#00FF7F";
-    ctx.font = '30px Courier';
+    ctx.fillStyle = "#09a89b";
+    ctx.font = '1.5rem Montserrat';
 
     // syntax --> fillText(text,x,y)
     ctx.fillText(score,x,y);
@@ -125,13 +131,13 @@ function reset(){
     ball.y = canvas.height / 2;
     ball.speed = 7;
 
-    // changes the direction of ball
-    ball.velocityX = -ball.velocityX;
+    // change the direction of the ball
     ball.velocityY = -ball.velocityY;
+    ball.velocityX = -ball.velocityX;
 }
 
 // collision Detect function
-function collisionDetect (player, ball){
+function collisionDetect(player, ball){
     // returns true or false
     player.top = player.y;
     player.right = player.x + player.width;
@@ -149,30 +155,37 @@ function collisionDetect (player, ball){
 function update(){
     // move the paddle
     if (upArrowPressed && user.y > 0) {
-        user.y -=8;
+        user.y -=10;
     } else if (downArrowPressed && (user.y < canvas.height - user.height)){
-        user.y +=8;
+        user.y +=10;
     }
 
     // check if ball hits top or bottom wall
     if (ball.y + ball.radius >= canvas.height || ball.y - ball.radius <= 0){
-        // play wallHitSound
+        // play wallHitsound
+        // wallHitSound.play();
 
         ball.velocityY = -ball.velocityY;
     }
 
-    // if ball hit on right wall
-    if(ball.x + ball.radius >= canvas.width){
+    if (ball.x + ball.radius >= canvas.width){
         // play scoreSound
+        // scoreSound.play();
+
+        // wallHitSound.play();
+
 
         // then user scored 1 point
         user.score += 1;
         reset();
     }
 
-    // if ball hit on left wall
     if (ball.x - ball.radius <= 0){
         // play scoreSound
+        // scoreSound.play();
+
+        // wallHitSound.play();
+
 
         // then ai scored 1 point
         ai.score += 1;
@@ -184,38 +197,42 @@ function update(){
     ball.y += ball.velocityY;
 
     // ai paddle movement
+    ai.y += ((ball.y - (ai.y + ai.height / 2))) * 0.15;
 
     // collision detection on paddles
-    
     let player = (ball.x < canvas.width / 2) ? user : ai;
 
-    if (collisionDetect(player, ball)){
-        // play hitSound
+    if (collisionDetect(player, ball)) {
+      // play hitSound
+      // hitSound.play();
 
-        // default angle is 0deg in Radian
-        let angle = 0;
-
+  
+      // default angle is 0deg in Radian
+      let angle = 0;
+  
+      if (ball.y < (player.y + player.height / 2)) {
         // if ball hit the top of paddle
-        if (ball.y < (player.y + player.height / 2)){
-            // then -1 * Math.PI / 4 = -45deg
-            angle = -1 * Math.PI / 4;
-        } else if (ball.y > (player.y + player.height / 2)){
-            // if it hit the bottom of paddle
-            // then angle will be Math.PI / 4 = 45deg
-            angle = 1 * Math.PI / 4;
-        }
-
-        /* change velocity of ball according to on which paddle the ball hitted */
-        ball.velocityX = (player === user ? 1 : -1) * ball.speed * Math.cos(angle);
-        ball.velocityY = ball.speed * Math.sin(angle);
-
-        // increase ball speed
-        ball.speed += 0.2;
+        // then -1 * Math.PI / 4 = -45deg aka UP
+        angle = Math.PI / 4;
+      } else if (ball.y > (player.y + player.height / 2)) {
+        // if it hit the bottom of paddle
+        // then angle will be Math.PI / 4 = 45deg aka DOWN
+        angle = -1 * Math.PI / 4;
+      }
+  
+      /* change velocity of ball according to on which paddle the ball hitted */
+      ball.velocityX = (player === user ? 1 : -1) * ball.speed * Math.cos(angle);
+      ball.velocityY = ball.speed * Math.sin(angle);
+  
+      // increase ball speed
+      ball.speed += 0.2;
+      ball.radius -= 0.1;
     }
+
 }
 
 function render(){
-    ctx.fillStyle = "#2E8B57";
+    ctx.fillStyle = "#065e56";
     ctx.fillRect(0,0, canvas.width, canvas.height);
 drawNet();
 //draw user score
