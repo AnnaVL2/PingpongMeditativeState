@@ -25,6 +25,8 @@ const net = {
     color: "white"
 };
 
+
+
 const user = {
     x: 10,
     y: canvas.height / 2 - paddleHeight / 2,
@@ -47,15 +49,14 @@ const ai = {
 const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    // radius: 46,
     radius: 26,
     speed: 7,
     velocityX: 5,
     velocityY: 5,
+    // color: "#09a89b",
     color: "#09a89b",
 };
 /* object declaration ends */
-
 
 
 /* drawing functions */
@@ -163,29 +164,26 @@ function update(){
     // check if ball hits top or bottom wall
     if (ball.y + ball.radius >= canvas.height || ball.y - ball.radius <= 0){
         // play wallHitsound
-        // wallHitSound.play();
 
         ball.velocityY = -ball.velocityY;
     }
 
     if (ball.x + ball.radius >= canvas.width){
         // play scoreSound
-        // scoreSound.play();
-
-        // wallHitSound.play();
-
 
         // then user scored 1 point
         user.score += 1;
+
+
+        
+
         reset();
     }
 
+
+
     if (ball.x - ball.radius <= 0){
         // play scoreSound
-        // scoreSound.play();
-
-        // wallHitSound.play();
-
 
         // then ai scored 1 point
         ai.score += 1;
@@ -204,8 +202,6 @@ function update(){
 
     if (collisionDetect(player, ball)) {
       // play hitSound
-      // hitSound.play();
-
   
       // default angle is 0deg in Radian
       let angle = 0;
@@ -224,9 +220,29 @@ function update(){
       ball.velocityX = (player === user ? 1 : -1) * ball.speed * Math.cos(angle);
       ball.velocityY = ball.speed * Math.sin(angle);
   
-      // increase ball speed
-      ball.speed += 0.2;
-      ball.radius -= 0.1;
+    function printColor(colors){
+
+        let random_color = colors[Math.floor(Math.random() * colors.length)];
+    
+        for(let i = 0; i < colors.length; i++){
+            if (user.score < 10){
+                ball.color = colors[i];
+                console.log(random_color);
+            }
+        }
+        return random_color;
+    }
+    
+    let changeColor = ["Aqua", "Chartreuse", "Chocolate", "DarkOrange", 
+     "DarkRed",  "DeepPink", "Fuchsia", "Gold", "GreenYellow", 
+    "HotPink", "LemonChiffon", "LightSeaGreen", "Violet", 
+    "MediumVioletRed", "NavajoWhite",  "MistyRose", "Orchid", "Plum", 
+    "SandyBrown", "Thistle", "Tomato", "Turquoise", "Wheat", "Yellow", "White"];
+
+    ball.color = printColor(changeColor);
+    // increase ball speed
+    ball.speed += 0.2;
+    // ball.radius += 0.5;
     }
 
 }
@@ -258,3 +274,6 @@ function gameLoop(){
 
 // calls gameLoop() function 60 times per second
 setInterval(gameLoop, 1000 / 60);
+
+// random change color - ball.color [random function]
+// if(score> 10){ multiply balls }
