@@ -5,5 +5,4 @@ https://thecodingpie.com/post/learn-to-code-ping-pong-game-using-javascript-and-
 https://www.w3schools.com/tags/ref_colornames.asp
 
 
-Bouncing Balls
-https://jsfiddle.net/rtoal/wvp4scLL/
+
