@@ -10,7 +10,7 @@ const netWidth = 4;
 const netHeight = canvas.height;
 
 const paddleWidth = 10;
-const paddleHeight = 120;
+const paddleHeight = 130;
 
 let upArrowPressed = false;
 let downArrowPressed = false;
