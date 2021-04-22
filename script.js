@@ -10,7 +10,7 @@ const netWidth = 4;
 const netHeight = canvas.height;
 
 const paddleWidth = 10;
-const paddleHeight = 100;
+const paddleHeight = 120;
 
 let upArrowPressed = false;
 let downArrowPressed = false;
@@ -24,7 +24,6 @@ const net = {
     height: netHeight,
     color: "white"
 };
-
 
 
 const user = {
@@ -50,10 +49,9 @@ const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     radius: 26,
-    speed: 7,
-    velocityX: 5,
-    velocityY: 5,
-    // color: "#09a89b",
+    speed: 20,
+    velocityX: 10,
+    velocityY: 10,
     color: "#09a89b",
 };
 /* object declaration ends */
@@ -156,9 +154,9 @@ function collisionDetect(player, ball){
 function update(){
     // move the paddle
     if (upArrowPressed && user.y > 0) {
-        user.y -=10;
+        user.y -= 15;
     } else if (downArrowPressed && (user.y < canvas.height - user.height)){
-        user.y +=10;
+        user.y += 15;
     }
 
     // check if ball hits top or bottom wall
@@ -173,10 +171,6 @@ function update(){
 
         // then user scored 1 point
         user.score += 1;
-
-
-        
-
         reset();
     }
 
@@ -195,7 +189,8 @@ function update(){
     ball.y += ball.velocityY;
 
     // ai paddle movement
-    ai.y += ((ball.y - (ai.y + ai.height / 2))) * 0.15;
+    // insertinc spontaneous moment in to the ai paddle movment
+    ai.y += ((ball.y - (ai.y + ai.height / 2))) * 0.45;
 
     // collision detection on paddles
     let player = (ball.x < canvas.width / 2) ? user : ai;
@@ -234,17 +229,17 @@ function update(){
     }
     
     let changeColor = ["Aqua", "Chartreuse", "Chocolate", "DarkOrange", 
-     "DarkRed",  "DeepPink", "Fuchsia", "Gold", "GreenYellow", 
-    "HotPink", "LemonChiffon", "LightSeaGreen", "Violet", 
-    "MediumVioletRed", "NavajoWhite",  "MistyRose", "Orchid", "Plum", 
-    "SandyBrown", "Thistle", "Tomato", "Turquoise", "Wheat", "Yellow", "White"];
+    "DarkRed",  "DeepPink", "Fuchsia", "Gold", "GreenYellow", "HotPink",
+    "LemonChiffon", "LightSeaGreen", "Violet", "MediumVioletRed", 
+    "NavajoWhite", "MistyRose", "Orchid", "Plum", "SandyBrown", "Thistle", 
+    "Tomato", "Turquoise", "Wheat", "Yellow", "White"];
 
     ball.color = printColor(changeColor);
+
     // increase ball speed
-    ball.speed += 0.2;
+    ball.speed += 0.8;
     // ball.radius += 0.5;
     }
-
 }
 
 function render(){
