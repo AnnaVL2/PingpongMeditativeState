@@ -6,7 +6,7 @@
 
 body {
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,8 +18,8 @@ body {
 }
 
 #canvas {
-    width: 650px;
-    height: 450px;
+    width: 1000px;
+    height: 850px;
     background-color:#ffffff;
     border-radius: 0.2rem;
 }
