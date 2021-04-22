@@ -49,9 +49,9 @@ const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     radius: 26,
-    speed: 20,
-    velocityX: 10,
-    velocityY: 10,
+    speed: 10,
+    velocityX: 20,
+    velocityY: 20,
     color: "#09a89b",
 };
 /* object declaration ends */
@@ -237,7 +237,7 @@ function update(){
     ball.color = printColor(changeColor);
 
     // increase ball speed
-    ball.speed += 0.8;
+    ball.speed += 2;
     // ball.radius += 0.5;
     }
 }
@@ -268,7 +268,7 @@ function gameLoop(){
 }
 
 // calls gameLoop() function 60 times per second
-setInterval(gameLoop, 1000 / 60);
+setInterval(gameLoop, 1200 / 60);
 
 // random change color - ball.color [random function]
 // if(score> 10){ multiply balls }
