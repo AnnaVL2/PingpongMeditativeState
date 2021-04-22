@@ -6,10 +6,10 @@ const hitSound = new Audio('../sounds/hitSound.wav');
 const scoreSound = new Audio('../sounds/scoreSound.wav');
 const wallHitSound = new Audio('../sounds/wallHitSound.wav');
 
-const netWidth = 4;
+const netWidth = 10;
 const netHeight = canvas.height;
 
-const paddleWidth = 10;
+const paddleWidth = 11;
 const paddleHeight = 130;
 
 let upArrowPressed = false;
@@ -66,8 +66,8 @@ function drawNet(){
     ctx.fillRect(net.x, net.y, net.width, net.height);
 }
 function drawScore(x,y,score){
-    ctx.fillStyle = "#09a89b";
-    ctx.font = '1.5rem Montserrat';
+    ctx.fillStyle = "white";
+    ctx.font = '10rem Montserrat';
 
     // syntax --> fillText(text,x,y)
     ctx.fillText(score,x,y);
@@ -247,10 +247,10 @@ function render(){
     ctx.fillRect(0,0, canvas.width, canvas.height);
 drawNet();
 //draw user score
-drawScore(canvas.width / 4, canvas.height / 6, user.score);
+drawScore(canvas.width / 5, canvas.height / 1.7, user.score);
 
 //draw ai score
-drawScore(3*canvas.width / 4, canvas.height / 6, ai.score);
+drawScore(3.5*canvas.width / 5, canvas.height / 1.7, ai.score);
 
 //draw user paddle
 drawPaddle(user.x, user.y, user.width, user.height, user.color);
