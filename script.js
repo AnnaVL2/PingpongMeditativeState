@@ -237,7 +237,7 @@ function update(){
     ball.color = printColor(changeColor);
 
     // increase ball speed
-    ball.speed += 2;
+    ball.speed += 0.5;
     // ball.radius += 0.5;
     }
 }
