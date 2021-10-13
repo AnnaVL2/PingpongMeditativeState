@@ -190,7 +190,7 @@ function update(){
 
     // ai paddle movement
     // insertinc spontaneous moment in to the ai paddle movment
-    ai.y += ((ball.y - (ai.y + ai.height / 2))) * 0.45;
+    ai.y += ((ball.y - (ai.y + ai.height / 2))) * 0.65;
 
     // collision detection on paddles
     let player = (ball.x < canvas.width / 2) ? user : ai;
@@ -237,7 +237,7 @@ function update(){
     ball.color = printColor(changeColor);
 
     // increase ball speed
-    ball.speed += 0.5;
+    ball.speed += 0.6;
     // ball.radius += 0.5;
     }
 }
