@@ -49,7 +49,7 @@ const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     radius: 26,
-    speed: 8,
+    speed: 5,
     velocityX: 20,
     velocityY: 20,
     color: "#09a89b",
@@ -190,7 +190,7 @@ function update(){
 
     // ai paddle movement
     // insertinc spontaneous moment in to the ai paddle movment
-    ai.y += ((ball.y - (ai.y + ai.height / 2))) * 0.65;
+    ai.y += ((ball.y - (ai.y + ai.height / 2))) * 0.45;
 
     // collision detection on paddles
     let player = (ball.x < canvas.width / 2) ? user : ai;
@@ -268,7 +268,7 @@ function gameLoop(){
 }
 
 // calls gameLoop() function 60 times per second
-setInterval(gameLoop, 1000 / 60);
+setInterval(gameLoop, 1200 / 60);
 
 // random change color - ball.color [random function]
 // if(score> 10){ multiply balls }
