@@ -238,7 +238,7 @@ function update(){
 
     // increase ball speed
     ball.speed += 0.8;
-    // ball.radius += 0.5;
+    ball.radius += 0.5;
     }
 }
 
