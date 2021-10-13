@@ -128,7 +128,7 @@ function reset(){
     // reset ball's value to older values
     ball.x = canvas.width / 2;
     ball.y = canvas.height / 2;
-    ball.speed = 9;
+    ball.speed = 7;
 
     // change the direction of the ball
     ball.velocityY = -ball.velocityY;
@@ -237,7 +237,7 @@ function update(){
     ball.color = printColor(changeColor);
 
     // increase ball speed
-    ball.speed += 1;
+    ball.speed += 0.8;
     // ball.radius += 0.5;
     }
 }
@@ -268,7 +268,7 @@ function gameLoop(){
 }
 
 // calls gameLoop() function 60 times per second
-setInterval(gameLoop, 2000 / 60);
+setInterval(gameLoop, 1000 / 60);
 
 // random change color - ball.color [random function]
 // if(score> 10){ multiply balls }
